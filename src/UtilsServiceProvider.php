@@ -13,5 +13,6 @@ class UtilsServiceProvider extends ServiceProvider {
 
     public function boot() {
         Helpers::include(__DIR__ . '/Helpers');
+        Extensions::include(__DIR__ . '/Extensions');
     }
 }

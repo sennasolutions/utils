@@ -2,9 +2,7 @@
 
 namespace Senna\Utils;
 
-use Illuminate\Support\Str;
-
-class Helpers {
+class Extensions {
     /**
      * Include helpers from a directory.
      *
@@ -13,16 +11,16 @@ class Helpers {
      */
     public static function include(string $directory = null) {
         $directory = $directory ?? __DIR__ . "/Helpers";
-        foreach (scandir($directory) as $helperFile) {
-            $path = $directory . "/" . $helperFile;
+        foreach (scandir($directory) as $extensionFile) {
+            $path = $directory . "/" . $extensionFile;
 
-            if (! is_file($path)) {
-                continue;
+            if (substr($extensionFile, 0, 1) === ".") continue;
+
+            if ( is_dir($path)) {
+                static::include($path);
             }
 
-            $function = Str::before($helperFile, '.php');
-
-            if (function_exists($function)) {
+            if (! is_file($path)) {
                 continue;
             }
 

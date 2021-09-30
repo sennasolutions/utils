@@ -4,7 +4,7 @@ namespace Senna\Utils;
 
 use Illuminate\Support\ServiceProvider;
 
-class SharedServiceProvider extends ServiceProvider {
+class UtilsServiceProvider extends ServiceProvider {
 
     // public function register()
     // {

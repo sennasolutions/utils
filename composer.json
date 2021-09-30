@@ -29,7 +29,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Senna\\Utils\\SharedServiceProvider"
+                "Senna\\Utils\\UtilsServiceProvider"
             ]
         }
     },

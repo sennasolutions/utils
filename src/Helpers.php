@@ -11,7 +11,7 @@ class Helpers {
      * @param string $directory
      * @return void
      */
-    public static function include(string $directory = null) {
+    public static function include(string $directory = null, $inGlobalScope = true) {
         $directory = $directory ?? __DIR__ . "/Helpers";
         foreach (scandir($directory) as $helperFile) {
             $path = $directory . "/" . $helperFile;
@@ -22,7 +22,7 @@ class Helpers {
 
             $function = Str::before($helperFile, '.php');
 
-            if (function_exists($function)) {
+            if ($inGlobalScope && function_exists($function)) {
                 continue;
             }
 

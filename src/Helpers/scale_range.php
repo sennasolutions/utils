@@ -1,6 +1,6 @@
 <?php
 
-namespace Senna\Utils;
+namespace Senna\Utils\Helpers;
 
 function scale_range( $value, $min, $max, $new_min, $new_max, array $bezier_curve = null ) {
     $value = ( $value - $min ) / ( $max - $min );

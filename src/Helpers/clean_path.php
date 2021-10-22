@@ -1,6 +1,6 @@
 <?php
 
-namespace Senna\Utils;
+namespace Senna\Utils\Helpers;
 
 /**
  * Clean a path to remove any unnecessary slashes.

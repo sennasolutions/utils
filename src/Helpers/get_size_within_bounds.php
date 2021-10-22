@@ -1,6 +1,6 @@
 <?php
 
-namespace Senna\Utils;
+namespace Senna\Utils\Helpers;
 
 function get_size_within_bounds(int $maxWidth, ?int $maxHeight) {
     $width = $this->width;

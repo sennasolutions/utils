@@ -1,6 +1,6 @@
 <?php
 
-namespace Senna\Utils;
+namespace Senna\Utils\Helpers;
 
 function human_filesize($bytes, $dec = 2) 
 {

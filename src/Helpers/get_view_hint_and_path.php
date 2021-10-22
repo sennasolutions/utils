@@ -1,6 +1,6 @@
 <?php
 
-namespace Senna\Utils;
+namespace Senna\Utils\Helpers;
 
 use Exception;
 use Illuminate\Support\Facades\View;

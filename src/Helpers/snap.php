@@ -1,6 +1,8 @@
 <?php
 
-namespace Senna\Utils;
+namespace Senna\Utils\Helpers;
+
+use Senna\Utils\SnapCache;
 
 function snap($closure, $key, $args = []) {
     return app(SnapCache::class)->closure($closure, $key, $args);

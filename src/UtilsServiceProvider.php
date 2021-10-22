@@ -12,11 +12,13 @@ class UtilsServiceProvider extends ServiceProvider {
          * https://laravel.com/docs/8.x/container#binding-scoped
          */
         $this->app->scoped(SnapCache::class);
+
+        Helpers::include(__DIR__ . '/Helpers/Global', $inGlobalScope = true);
+        Helpers::include(__DIR__ . '/Helpers', $inGlobalScope = false);
     }
 
     public function boot() {
-        Helpers::include(__DIR__ . '/Helpers/Global', $inGlobalScope = true);
-        Helpers::include(__DIR__ . '/Helpers/Namespaced', $inGlobalScope = false);
+        
         Extensions::include(__DIR__ . '/Extensions');
     }
 }

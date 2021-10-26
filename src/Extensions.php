@@ -27,6 +27,4 @@ class Extensions {
             require_once $path;
         }
     }
-
-    
 }

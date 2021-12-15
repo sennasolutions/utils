@@ -46,4 +46,9 @@ class SnapCache {
         }
         return $key;
     }
+
+    public static function resolve() : SnapCache
+    {
+        return app(static::class);
+    }
 }

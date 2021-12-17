@@ -2,6 +2,7 @@
 
 namespace Senna\Utils;
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class Helpers {
@@ -13,6 +14,9 @@ class Helpers {
      */
     public static function include(string $directory = null, $inGlobalScope = true) {
         $directory = $directory ?? __DIR__ . "/Helpers";
+
+        if (!File::exists($directory)) return;
+
         foreach (scandir($directory) as $helperFile) {
             $path = $directory . "/" . $helperFile;
 

@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\User;
+use Senna\Admin\Interfaces\SennaUser;
 
-function user($guard = null) : ?User
+function user($guard = null) : ?SennaUser
 {
     return auth($guard)->user();
 }

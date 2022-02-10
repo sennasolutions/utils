@@ -36,10 +36,11 @@ trait WithRequiredAbilities
             }
             $type = $resource ? get_class_name($resource) : get_class_name($staticModel);
 
+            // $response = Gate::authorize($ability, [user(), $resource ?? $staticModel]);
             $response = Gate::inspect($ability, $resource ?? $staticModel);
 
             if ($response->denied()) {
-                $role = user()->roles->map(fn($x) => $x->slug)->join(',') ?? null;
+                $role = user()?->roles->map(fn($x) => $x->slug)->join(',') ?? null;
                 $roleText = $role ? "role `{$role}`" : 'user';
                 $msg = $response->message();
                 $msgText = $msg ? " - {$msg}." : '';

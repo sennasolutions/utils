@@ -31,6 +31,9 @@ trait WithRequiredAbilities
         $resources = is_array($resources) ? $resources : [ $resources ];
 
         foreach($resources as $resource) {
+            if (is_integer($resource)) {
+                $resource = $staticModel::find($resource);
+            }
             $type = $resource ? get_class_name($resource) : get_class_name($staticModel);
 
             $response = Gate::inspect($ability, $resource ?? $staticModel);

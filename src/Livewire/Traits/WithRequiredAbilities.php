@@ -19,7 +19,7 @@ trait WithRequiredAbilities
         }
     }
 
-    protected function authorizeAbilities(mixed $resources, string $staticModel) {
+    protected function authorizeAbilities(mixed $resources, string $staticModel = null) {
         $resources = is_array($resources) ? $resources : [ $resources ];
 
         foreach($this->abilities as $ability) {
@@ -27,7 +27,7 @@ trait WithRequiredAbilities
         }
     }
 
-    protected function authorizeAbility(mixed $resources, string $staticModel, string $ability) {
+    protected function authorizeAbility(mixed $resources, string $staticModel = null, string $ability) {
         $resources = is_array($resources) ? $resources : [ $resources ];
 
         foreach($resources as $resource) {

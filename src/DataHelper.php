@@ -3,6 +3,13 @@
 namespace Senna\Utils;
 
 
+/**
+ * This is a helper for writing/reading array data in a model with support for the deep dot-notation.
+ * 
+ * @example $model->set('data.wishes', [
+ *    'function' => 'Webdeveloper'
+ * ]);
+ */
 class DataHelper
 {
     public function __construct(public &$model) {}
@@ -86,5 +93,10 @@ class DataHelper
         }
 
         return $this->set($key, $data);
+    }
+
+    public function save()
+    {
+        $this->model->save();
     }
 }

@@ -2,8 +2,11 @@
 
 namespace Senna\Utils;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 use Senna\Utils\SnapCache;
+
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UtilsServiceProvider extends ServiceProvider {
 
@@ -15,6 +18,22 @@ class UtilsServiceProvider extends ServiceProvider {
 
         Helpers::include(__DIR__ . '/Helpers/Global', $inGlobalScope = true);
         Helpers::include(__DIR__ . '/Helpers', $inGlobalScope = false);
+
+        Collection::macro('paginate', function($perPage, $total = null, $page = null, $pageName = 'page', $queryParams = null) {
+            $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
+
+            return new LengthAwarePaginator(
+                $this->forPage($page, $perPage),
+                $total ?: $this->count(),
+                $perPage,
+                $page,
+                [
+                    'path' => LengthAwarePaginator::resolveCurrentPath(),
+                    'pageName' => $pageName,
+                    'query' => isset($queryParams) ? $queryParams : request()->query()
+                ]
+            );
+        });
     }
 
     public function boot() {

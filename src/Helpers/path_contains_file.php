@@ -4,15 +4,23 @@ namespace Senna\Utils\Helpers;
 
 use Illuminate\Support\Facades\File;
 
-function path_contains_file($path, $string, $use_str_contains = true) {
+/**
+ * Check if a path contains a filename or a substring of the filename
+ *
+ * @param [type] $path
+ * @param [type] $string
+ * @param boolean $use_str_contains
+ * @return void
+ */
+function path_contains_file(string $path, string $search, bool $use_str_contains = true, bool $return_filename = false) {
     foreach (File::allFiles($path) as $file) {
         if ($use_str_contains) {
-            if (str_contains($file->getFilename(), $string)) {
-                return true;
+            if (str_contains($file->getFilename(), $search)) {
+                return $return_filename ? $file->getFilename() : true;
             }
         } else {
-            if ($file->getFilename() == $string) {
-                return true;
+            if ($file->getFilename() == $search) {
+                return $return_filename ? $file->getFilename() : true;
             }
         }
     }

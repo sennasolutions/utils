@@ -2,12 +2,14 @@
 
 namespace Senna\Utils;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 use Senna\Utils\SnapCache;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Senna\Utils\Console\InstallCommand;
+use Senna\Utils\Exceptions\AuthorizationException as ExceptionsAuthorizationException;
 
 class UtilsServiceProvider extends ServiceProvider {
 
@@ -42,7 +44,6 @@ class UtilsServiceProvider extends ServiceProvider {
     }
 
     public function boot() {
-        
         Extensions::include(__DIR__ . '/Extensions');
     }
 }

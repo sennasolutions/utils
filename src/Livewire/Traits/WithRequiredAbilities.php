@@ -19,6 +19,13 @@ trait WithRequiredAbilities
         }
     }
 
+    /**
+     * Authorize the abilities specified in the $abilities array on the given resources
+     *
+     * @param mixed $resources
+     * @param string|null $staticModel
+     * @return void
+     */
     protected function authorizeAbilities(mixed $resources, string $staticModel = null) {
         $resources = is_array($resources) ? $resources : [ $resources ];
 
@@ -27,6 +34,14 @@ trait WithRequiredAbilities
         }
     }
 
+    /**
+     * Authorize the given ability on the given resources
+     *
+     * @param mixed $resources
+     * @param string|null $staticModel
+     * @param string $ability
+     * @return void
+     */
     protected function authorizeAbility(mixed $resources, string $staticModel = null, string $ability) {
         $resources = is_array($resources) ? $resources : [ $resources ];
 
@@ -50,4 +65,5 @@ trait WithRequiredAbilities
             }
         }
     }
+
 }

@@ -23,5 +23,4 @@ trait WithProtection
    
    use WithPropertyProtection;
    use WithMethodProtection;
-   use WithRequiredAbilities;
 }

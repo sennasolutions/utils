@@ -6,22 +6,45 @@ class Performance {
     public static $logs = [];
     public static $colors = ['blue', 'red', 'green', 'purple', 'grey'];
 
+    public static $results = [];
+
     public static function start($name) {
         if (!static::isActive()) return;
 
         $int = intval(preg_replace("/[^\d]/", "", md5($name)));
 
+        static::$results[$name] = [
+            'start' => microtime(true),
+            'end' => null
+        ];
+
         clock()->event($name)->color(static::$colors[$int % count(static::$colors)])->begin();
     }
 
-    public static function end($name) {
-        if (!static::isActive()) return;
+    public static function end($name) : string {
+        if (!static::isActive()) return "";
+
+        static::$results[$name] = [
+            'start' => static::$results[$name]['start'],
+            'end' => microtime(true)
+        ];
+
         clock()->event($name)->end();
+
+        return static::get($name);
     }
 
     public static function stop($name)
     {
         return static::end($name);
+    }
+
+    public static function get($name)
+    {
+        $result = static::$results[$name];
+
+        // Display in milliseconds
+        return "$name completed in " . round(($result['end'] - $result['start']) * 1000, 2) . "ms";
     }
 
     public static function isActive() {

@@ -21,11 +21,14 @@ class SnapCache {
         return isset($this->values[$key]);
     }
 
-    public function clear($key) : self {
-        $key = $this->processKey($key);
-
-        unset($this->values[$key]);
-
+    public function clear($key = null) : self {
+        if ($key) {
+            $key = $this->processKey($key);
+            unset($this->values[$key]);
+        } else {
+            $this->values = [];
+        }
+        
         return $this;
     }
 

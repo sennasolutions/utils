@@ -28,6 +28,7 @@ class CacheHelper {
 
     public function key(mixed ...$key) : self {
         $this->key = serialize($key);
+
         return $this;
     }
 

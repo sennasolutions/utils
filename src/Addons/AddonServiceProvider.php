@@ -78,7 +78,7 @@ abstract class AddonServiceProvider extends ServiceProvider
      */
     protected function publishesSome($type = "config", $fileWithoutExtension = "create_senna_activity_migrations") {
         if (app()->runningInConsole()) {
-            $time = time();
+            $time = time() + 100; // So that its run after depedency migrations
 
             if ($type === "migration.fixed" || $type === "migrations.fixed") {
                 $stub = static::getPluginDir("database/migrations/${fileWithoutExtension}.stub.php");

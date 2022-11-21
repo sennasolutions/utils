@@ -5,6 +5,11 @@ namespace Senna\Utils;
 class SnapCache {
     protected $values = [];
 
+    public function getValues()
+    {
+        return $this->values;
+    }
+
     public function put($key, $value) {
         $key = $this->processKey($key);
         return $this->values[$key] = $value;

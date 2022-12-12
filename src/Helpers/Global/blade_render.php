@@ -39,3 +39,11 @@ function blade_render($string, $data = [], $deleteCachedView = false)
         }
     });
 }
+
+function blade_render_safe($string, $data = [],  $deleteCachedView = false) {
+    try {
+        return blade_render($string, $data, $deleteCachedView);
+    } catch (\Throwable $th) {
+        return "Error: " . $th->getMessage();
+    }
+}

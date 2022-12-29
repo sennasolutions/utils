@@ -40,6 +40,6 @@ trait WithAdvancedPagination
 
     public function applyPagination($query)
     {
-        return $query->paginate($this->perPage, ['*'], 'page', $this->page);
+        return $query->paginate($this->perPage, ['*'], 'page');
     }
 }

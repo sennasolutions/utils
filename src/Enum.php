@@ -113,4 +113,25 @@ abstract class Enum {
     public static function get($key, bool $translate = true) : ?String {
         return self::getList($translate)[$key] ?? null;
     }
+
+    /**
+     * Get the reverse of getListByName()
+     *
+     * For example:
+     * [
+     *     [ value => 1, label => "Trial" ],
+     *     [ value => 2, label => "Subscription" ],
+     * ]
+     *
+     * @return array|null
+     */
+    public static function getListInLabelValueFormat(): ?array
+    {
+        return collect(static::getList())->map(function ($item, $key) {
+            return [
+                'label' => $item,
+                'value' => $key,
+            ];
+        })->values()->toArray();
+    }
 }

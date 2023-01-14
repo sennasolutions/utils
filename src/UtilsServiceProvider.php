@@ -42,6 +42,6 @@ class UtilsServiceProvider extends ServiceProvider {
     }
 
     public function boot() {
-        Extensions::include(__DIR__ . '/Extensions');
+        Extensions::inclMacude(__DIR__ . '/Extensions');
     }
 }

@@ -6,12 +6,28 @@
     "authors": [
         {
             "name": "Lennard",
-            "email": "packagist@spring.nl"
+            "email": "packagist@spring.nl",
+            "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.0",
+        "illuminate/contracts": "^8.0|^9.0|^10.0",
+        "senna/package-tools": "dev-main",
         "ezyang/htmlpurifier": "^4.16"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.0",
+        "nunomaduro/collision": "^6.0",
+        "nunomaduro/larastan": "^2.0.1",
+        "orchestra/testbench": "^7.0",
+        "pestphp/pest": "^1.21",
+        "pestphp/pest-plugin-laravel": "^1.1",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpunit/phpunit": "^9.5",
+        "spatie/laravel-ray": "^1.26"
     },
     "autoload": {
         "psr-4": {
@@ -23,10 +39,6 @@
             "Senna\\Utils\\Tests\\": "tests"
         }
     },
-    "require-dev": {
-         "orchestra/testbench": "^6.0",
-        "phpunit/phpunit": "^9.5"
-    },
     "extra": {
         "laravel": {
             "providers": [
@@ -35,7 +47,24 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit --testdox",
-        "test-f": "vendor/bin/phpunit --filter"
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "analyse": "vendor/bin/phpstan analyse .",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../package-tools"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
     }
 }

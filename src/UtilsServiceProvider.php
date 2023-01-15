@@ -2,46 +2,29 @@
 
 namespace Senna\Utils;
 
-use Illuminate\Support\Collection;
-use Illuminate\Support\ServiceProvider;
-use Senna\Utils\SnapCache;
+use Senna\PackageTools\Package;
+use Senna\PackageTools\PackageServiceProvider;
 
-use Illuminate\Pagination\LengthAwarePaginator;
-use Senna\Utils\Console\InstallCommand;
-
-class UtilsServiceProvider extends ServiceProvider {
-
-    public function register() {
-        /**
-         * https://laravel.com/docs/8.x/container#binding-scoped
+class UtilsServiceProvider extends PackageServiceProvider
+{
+    public function configurePackage(Package $package): void
+    {
+        /*
+         * This class is a Package Service Provider
+         *
+         * More info: https://github.com/spatie/laravel-package-tools
          */
-        $this->app->scoped(SnapCache::class);
-
-        $this->commands([
-            InstallCommand::class,
-        ]);
-
-        Helpers::include(__DIR__ . '/Helpers/Global', $inGlobalScope = true);
-        Helpers::include(__DIR__ . '/Helpers', $inGlobalScope = false);
-
-        Collection::macro('paginate', function($perPage, $total = null, $page = null, $pageName = 'page', $queryParams = null) {
-            $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
-
-            return new LengthAwarePaginator(
-                $this->forPage($page, $perPage),
-                $total ?: $this->count(),
-                $perPage,
-                $page,
-                [
-                    'path' => LengthAwarePaginator::resolveCurrentPath(),
-                    'pageName' => $pageName,
-                    'query' => isset($queryParams) ? $queryParams : request()->query()
-                ]
-            );
-        });
-    }
-
-    public function boot() {
-        Extensions::include(__DIR__ . '/Extensions');
+        $package
+            ->name('shared')
+            // ->hasConfigFile()
+            // ->hasViews()
+            // ->hasMigration('create_shared_table')
+            ->hasHelperDirectory("Helpers", inGlobalScope: false)
+            ->hasHelperDirectory("Helpers/Global", inGlobalScope: true)
+            ->hasMacroDirectory("Macros/Carbon")
+            ->hasMacroDirectory("Macros/Collection")
+            ->hasMacroDirectory("Macros/Stringable")
+            // ->hasCommand(UtilsCommand::class)
+            ;
     }
 }

@@ -1,63 +1,59 @@
 <?php
 
-namespace Senna\Utils\Tests\Feature;
-
 use Senna\Utils\Exceptions\HookException;
 use Senna\Utils\Hook;
-use Senna\Utils\Tests\TestCase;
 
-class HookTest extends TestCase
+it('can has multiple args', function()
 {
-    public function testHookMultipleArgs()
-    {
-        Hook::clearHooks();
+    Hook::clearHooks();
 
-        Hook::register('test', function ($a, $b) {
-            return $a + $b;
-        });
+    Hook::register('test', function ($a, $b) {
+        return $a + $b;
+    });
 
-        $this->assertEquals(3, Hook::run('test', 1, 2));
-    }
+    expect(Hook::run('test', 1, 2))->toBe(3);
 
-    public function testHookForgettingReturn()
-    {
-        Hook::clearHooks();
-        $this->expectException(HookException::class);
+    // $this->assertEquals(3, Hook::run('test', 1, 2));
+});
 
-        Hook::register('test', function ($a, $b) {
-            // Do nothing
-        });
+it('it should give exception on no return specified', function()
+{
+    Hook::clearHooks();
+    $this->expectException(HookException::class);
 
-        Hook::run('test', 1, 2);
-    }
+    Hook::register('test', function ($a, $b) {
+        // Do nothing
+    });
 
-    public function testHookMultipleHooks()
-    {
-        Hook::clearHooks();
+    Hook::run('test', 1, 2);
+});
 
-        Hook::register('test', function ($a, $b) {
-            return $a + $b;
-        });
+it('it can run mulitple hooks', function()
+{
+    Hook::clearHooks();
 
-        Hook::register('test', function ($a, $b) {
-            return $a * $b;
-        });
+    Hook::register('test', function ($a, $b) {
+        return $a + $b;
+    });
 
-        $this->assertEquals(6, Hook::run('test', 1, 2));
-    }
+    Hook::register('test', function ($a, $b) {
+        return $a * $b;
+    });
 
-    public function testHookMultipleHooksWithPriority()
-    {
-        Hook::clearHooks();
-        
-        Hook::register('test', function ($a, $b) {
-            return $a + $b;
-        }, 5);
+    expect(Hook::run('test', 1, 2))->toBe(6);
+});
 
-        Hook::register('test', function ($a, $b) {
-            return $a * $b;
-        }, 1);
+it('can run multiple hooks with priority', function()
+{
+    Hook::clearHooks();
+    
+    Hook::register('test', function ($a, $b) {
+        return $a + $b;
+    }, 5);
 
-        $this->assertEquals(4, Hook::run('test', 1, 2));
-    }
-}
+    Hook::register('test', function ($a, $b) {
+        return $a * $b;
+    }, 1);
+
+    expect(Hook::run('test', 1, 2))->toBe(4);
+});

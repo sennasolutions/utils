@@ -24,6 +24,7 @@ class UtilsServiceProvider extends PackageServiceProvider
             ->hasMacroDirectory("Macros/Carbon")
             ->hasMacroDirectory("Macros/Collection")
             ->hasMacroDirectory("Macros/Stringable")
+            ->hasMacroDirectory("Macros/ComponentAttributeBag")
             // ->hasCommand(UtilsCommand::class)
             ;
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94cc50a535b3d1a73cbc8a3c455509b7",
+    "content-hash": "1bd7247980800308ef950c80550d5af6",
     "packages": [
         {
             "name": "brick/math",
@@ -2156,7 +2156,7 @@
             "dist": {
                 "type": "path",
                 "url": "../package-tools",
-                "reference": "b5b48c636a17e7eab0187dc73f4e376409696e95"
+                "reference": "d9c56295773a7e84c15474baa5565aac07f8d69c"
             },
             "require": {
                 "illuminate/contracts": "^8.0|^9.28|^10.0",
@@ -2164,9 +2164,9 @@
             },
             "require-dev": {
                 "mockery/mockery": "^1.5",
-                "orchestra/testbench": "^7.7|^8.0",
+                "orchestra/testbench": "^7.19",
                 "pestphp/pest": "^1.22",
-                "phpunit/phpunit": "^9.5.24",
+                "phpunit/phpunit": "^9.5",
                 "spatie/pest-plugin-test-time": "^1.1"
             },
             "type": "library",
@@ -8619,9 +8619,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "senna/package-tools": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

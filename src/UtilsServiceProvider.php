@@ -2,8 +2,10 @@
 
 namespace Senna\Utils;
 
+use Illuminate\Support\Facades\Blade;
 use Senna\PackageTools\Package;
 use Senna\PackageTools\PackageServiceProvider;
+use Senna\Utils\Components\Delegate;
 
 class UtilsServiceProvider extends PackageServiceProvider
 {
@@ -15,9 +17,10 @@ class UtilsServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('shared')
+            ->name('utils')
+            ->prefix('senna')
             // ->hasConfigFile()
-            // ->hasViews()
+            ->hasViews()
             // ->hasMigration('create_shared_table')
             ->hasHelperDirectory("Helpers", inGlobalScope: false)
             ->hasHelperDirectory("Helpers/Global", inGlobalScope: true)
@@ -27,5 +30,10 @@ class UtilsServiceProvider extends PackageServiceProvider
             ->hasMacroDirectory("Macros/ComponentAttributeBag")
             // ->hasCommand(UtilsCommand::class)
             ;
+    }
+
+    public function bootingPackage()
+    {
+        Blade::component(Delegate::class, 'senna.delegate');
     }
 }

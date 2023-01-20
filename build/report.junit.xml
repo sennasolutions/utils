@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="5" assertions="5" errors="0" warnings="0" failures="0" skipped="0" time="0.107250">
-    <testsuite name="P\Tests\Feature\HookTest" file="/Users/x/Websites/laravel/packages/senna/utils/vendor/pestphp/pest/src/Factories/TestCaseFactory.php(223) : eval()'d code" tests="4" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.099141">
-      <testcase name="it can has multiple args" assertions="1" time="0.075028"/>
-      <testcase name="it it can run mulitple hooks" assertions="1" time="0.008140"/>
-      <testcase name="it it should give exception on no return specified" assertions="1" time="0.008571"/>
-      <testcase name="it can run multiple hooks with priority" assertions="1" time="0.007402"/>
+  <testsuite name="" tests="6" assertions="8" errors="0" warnings="0" failures="0" skipped="0" time="0.073265">
+    <testsuite name="P\Tests\Feature\HookTest" file="/Users/x/Websites/laravel/packages/senna/utils/vendor/pestphp/pest/src/Factories/TestCaseFactory.php(223) : eval()'d code" tests="4" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.062455">
+      <testcase name="it can run multiple hooks with priority" assertions="1" time="0.048079"/>
+      <testcase name="it it should give exception on no return specified" assertions="1" time="0.005451"/>
+      <testcase name="it it can run mulitple hooks" assertions="1" time="0.004481"/>
+      <testcase name="it can has multiple args" assertions="1" time="0.004444"/>
     </testsuite>
-    <testsuite name="P\Tests\Feature\SennaModelTest" file="/Users/x/Websites/laravel/packages/senna/utils/vendor/pestphp/pest/src/Factories/TestCaseFactory.php(223) : eval()'d code" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.008109">
-      <testcase name="it i return the correct model path" assertions="1" time="0.008109"/>
+    <testsuite name="P\Tests\Feature\AccessPrivatePropertyTest" file="/Users/x/Websites/laravel/packages/senna/utils/vendor/pestphp/pest/src/Factories/TestCaseFactory.php(223) : eval()'d code" tests="1" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.004859">
+      <testcase name="it can access private property" assertions="3" time="0.004859"/>
+    </testsuite>
+    <testsuite name="P\Tests\Feature\SennaModelTest" file="/Users/x/Websites/laravel/packages/senna/utils/vendor/pestphp/pest/src/Factories/TestCaseFactory.php(223) : eval()'d code" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.005950">
+      <testcase name="it i return the correct model path" assertions="1" time="0.005950"/>
     </testsuite>
   </testsuite>
 </testsuites>

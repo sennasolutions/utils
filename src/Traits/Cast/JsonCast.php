@@ -37,8 +37,11 @@ trait JsonCast
     public static function castFrom(array $arguments) : self
     {
         $options = new self();
+        $skip = $options->jsonSkip ?? [];
 
         foreach($arguments as $key => $value) {
+            if ($key === 'jsonSkip' || in_array($key, $skip)) continue;
+
             $definedType = get_defined_type($options, $key);
             $definedTypeName = $definedType->getName();
 
@@ -60,14 +63,22 @@ trait JsonCast
             }
         }
 
+        if (method_exists($options, 'afterCastFrom')) {
+            $options = $options->afterCastFrom($arguments);
+        }
+
         return $options;
     }
 
     public function castTo() : array
     {
         $array = [];
+        $skip = $this->jsonSkip ?? [];
+
         // Loop over props
         foreach($this as $key => $value) {
+            if ($key === 'jsonSkip' || in_array($key, $skip)) continue;
+            
             if (is_object($value)) {
                 if (method_exists($value, 'castTo')) {
                     $array[$key] = $value->castTo();
@@ -77,6 +88,10 @@ trait JsonCast
             } else {
                 $array[$key] = $value;
             }
+        }
+
+        if (method_exists($this, 'afterCastTo')) {
+            $array = $this->afterCastTo($array);
         }
 
         return $array;

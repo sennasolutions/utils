@@ -12,7 +12,7 @@ ComponentAttributeBag::macro('strip', function ($tag) {
     $that = clone $this;
 
     foreach($that as $key => $value) {
-        $that[str_replace($tag, "", $key)] = $value;
+        $that[(string) str($key)->replaceFirst($tag, "")] = $value;
         unset($that[$key]);
     }
 

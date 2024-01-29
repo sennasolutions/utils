@@ -11,6 +11,10 @@ class UtilsServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
+        $this->app->singleton(SnapCache::class, function ($app) {
+            return new SnapCache();
+        });
+        
         /*
          * This class is a Package Service Provider
          *

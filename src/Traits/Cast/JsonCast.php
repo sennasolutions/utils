@@ -47,6 +47,7 @@ trait JsonCast
 
             // enum
             if (is_subclass_of($definedTypeName, BackedEnum::class)) {
+                $value = is_object($value) ? $value->value : $value;
                 if ($definedType->allowsNull() || $definedTypeName::tryFrom($value)) {
                     $options->$key = $definedTypeName::tryFrom($value);
                 }
@@ -56,7 +57,11 @@ trait JsonCast
                 if (!$value && $definedType->allowsNull()) {
                     $options->$key = null;
                 } else if (method_exists($definedTypeName, 'castFrom')) {
-                    $options->$key = $definedTypeName::castFrom((array) $value);
+                    try {
+                        $options->$key = $definedTypeName::castFrom((array) $value);
+                    } catch (\Throwable $e) {
+
+                    }
                 } else {
                     $options->$key = (array) $value;
                 }

@@ -60,7 +60,6 @@ trait JsonCast
                     try {
                         $options->$key = $definedTypeName::castFrom((array) $value);
                     } catch (\Throwable $e) {
-
                     }
                 } else {
                     $options->$key = (array) $value;
@@ -68,6 +67,7 @@ trait JsonCast
             }
         }
 
+        
         if (method_exists($options, 'afterCastFrom')) {
             $options = $options->afterCastFrom($arguments);
         }

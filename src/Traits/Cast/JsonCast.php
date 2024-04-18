@@ -42,8 +42,12 @@ trait JsonCast
         foreach($arguments as $key => $value) {
             if ($key === 'jsonSkip' || in_array($key, $skip)) continue;
 
-            $definedType = get_defined_type($options, $key);
-            $definedTypeName = $definedType->getName();
+            try {
+                $definedType = get_defined_type($options, $key);
+                $definedTypeName = $definedType->getName();
+            } catch (\Throwable $e) {
+                continue;
+            }
 
             // enum
             if (is_subclass_of($definedTypeName, BackedEnum::class)) {

@@ -81,19 +81,19 @@ abstract class AddonServiceProvider extends ServiceProvider
             $time = time() + 100; // So that its run after depedency migrations
 
             if ($type === "migration.fixed" || $type === "migrations.fixed") {
-                $stub = static::getPluginDir("database/migrations/${fileWithoutExtension}.stub.php");
+                $stub = static::getPluginDir("database/migrations/{$fileWithoutExtension}.stub.php");
                 
                 $this->publishes([
-                    $stub => database_path('migrations/' . "${fileWithoutExtension}.php"),
+                    $stub => database_path('migrations/' . "{$fileWithoutExtension}.php"),
                 ], 'migrations');
             }
 
             if ($type === "migration" || $type === "migrations") {
                 // Search the path for the migration
                 $newFilename = path_contains_file(database_path('migrations/'), $fileWithoutExtension, use_str_contains: true, return_filename: true);
-                $newFilename = $newFilename ? $newFilename : date('Y_m_d_His', $time) . "_${fileWithoutExtension}.php";
+                $newFilename = $newFilename ? $newFilename : date('Y_m_d_His', $time) . "_{$fileWithoutExtension}.php";
 
-                $stub = static::getPluginDir("database/migrations/${fileWithoutExtension}.stub.php");
+                $stub = static::getPluginDir("database/migrations/{$fileWithoutExtension}.stub.php");
                     
                 $this->publishes([
                     $stub => database_path('migrations/' . $newFilename),
@@ -103,7 +103,7 @@ abstract class AddonServiceProvider extends ServiceProvider
             
             if ($type === "config") {
                 $this->publishes([
-                    static::getPluginDir("config/${fileWithoutExtension}.php") => config_path("${fileWithoutExtension}.php"),
+                    static::getPluginDir("config/{$fileWithoutExtension}.php") => config_path("{$fileWithoutExtension}.php"),
                 ], 'config');
             }
 

@@ -59,6 +59,6 @@ class Performance {
     }
 
     public static function isActive() {
-        return (env('APP_ENV') === "local");
+        return app()->environment('local');
     }
 }
